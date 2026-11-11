@@ -43,9 +43,11 @@ def profile_links(cls=""):
         out.append(f'<a class="plink" href="{href}"{tgt}><svg class="{ic}" aria-hidden="true"><use href="#{icon}"/></svg>{label}</a>')
     return f'<div class="flex flex-wrap gap-2 {cls}">' + "".join(out) + '</div>'
 
+CURRENT = ' aria-current="page"'
+
 def header(active):
     links = "\n".join(
-        f'          <a class="nav-link" href="{f}"{" aria-current=\"page\"" if t == active else ""}>{t}</a>'
+        f'          <a class="nav-link" href="{f}"{CURRENT if t == active else ""}>{t}</a>'
         for f, t in PAGES[1:])
     return f'''  <header class="sticky top-0 z-40 border-b border-line bg-paper/90 backdrop-blur-md">
     <div class="wrap flex h-16 items-center justify-between gap-6">
