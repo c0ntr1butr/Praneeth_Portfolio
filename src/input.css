@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Smooth cross-fade between pages in supporting browsers */
+@view-transition { navigation: auto; }
+
+@layer base {
+  html { @apply bg-paper antialiased; }
+  body { @apply flex min-h-screen flex-col bg-paper font-sans text-[16px] leading-relaxed text-ink; }
+  main { @apply flex-1; }
+  ::selection { @apply bg-ink text-paper; }
+  :focus-visible { @apply rounded-sm outline outline-2 outline-offset-2 outline-blue; }
+}
+
+@layer components {
+  .wrap { @apply mx-auto w-full max-w-[60rem] px-5 sm:px-8; }
+
+  /* Navigation */
+  .nav-link { @apply rounded-md px-3 py-1.5 text-[14.5px] text-ink-60 transition hover:bg-ink/5 hover:text-ink; }
+  .nav-link[aria-current="page"] { @apply bg-ink/[0.06] text-ink; }
+
+  /* Type */
+  .subhead { @apply font-mono text-[11px] uppercase leading-[1.35] tracking-[0.08em] text-ink-50; }
+  .page-head { @apply border-b border-line pb-8 pt-14 md:pt-20; }
+  .page-title { @apply font-serif text-[clamp(2.2rem,4.5vw,3rem)] font-normal leading-none tracking-[-0.01em]; }
+  .page-sub { @apply mt-3 text-[16px] text-ink-60; }
+  .section-label { @apply mb-2 pt-10 font-mono text-[11px] uppercase tracking-[0.08em] text-ink-50; }
+  .body { @apply text-[15px] leading-relaxed text-ink-60; }
+
+  /* Entries (roles, publications) */
+  .entry { @apply grid gap-4 border-b border-line py-7 last:border-0 sm:grid-cols-[3rem_1fr] sm:gap-6; }
+  .entry-title { @apply text-[17.5px] font-medium leading-snug tracking-[-0.01em] text-ink; }
+  .entry-org { @apply mt-1 text-[14.5px] text-ink-60; }
+  .badge { @apply ml-1.5 inline-block rounded-[4px] border border-line px-1.5 py-0.5 align-middle font-mono text-[10px] uppercase tracking-[0.06em] text-ink-60; }
+
+  .bullets { @apply mt-3 grid gap-1.5 text-[15px] leading-relaxed text-ink-60; }
+  .bullets li { @apply relative pl-5; }
+  .bullets li::before { content: ""; @apply absolute left-0 top-[0.72em] h-px w-2.5 bg-ink-50; }
+
+  .row { @apply grid gap-1 border-b border-line py-3 text-[15px] text-ink-60 last:border-0 sm:grid-cols-[10rem_1fr]; }
+  .row b { @apply font-normal text-ink; }
+
+  /* Buttons & links */
+  .btn { @apply inline-flex items-center gap-2 rounded-md px-4 py-2.5 text-[14.5px] leading-none transition duration-200; }
+  .btn-dark { @apply btn bg-ink text-paper hover:bg-ink-80; }
+  .btn-line { @apply btn border border-ink/80 text-ink hover:bg-ink hover:text-paper; }
+  .plink { @apply inline-flex items-center gap-2 rounded-md border border-line bg-paper-card px-3 py-1.5 text-[13.5px] text-ink-80 transition hover:border-ink-30 hover:bg-white hover:text-ink; }
+  .ext { @apply inline-flex items-center gap-1 underline decoration-ink-30 underline-offset-4 transition hover:decoration-ink; }
+
+  .icon { @apply h-4 w-4 shrink-0 fill-none stroke-current; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+  .icon-fill { @apply h-4 w-4 shrink-0 fill-current; }
+
+  /* Logos & photos: small, square, rounded */
+  .logo-tile { @apply grid h-12 w-12 shrink-0 place-items-center overflow-hidden rounded-xl border border-line bg-white p-1.5; }
+  .logo-tile img { @apply h-full w-full object-contain; }
+  .monogram { @apply logo-tile bg-paper-card font-serif text-[22px] leading-none text-ink-80; }
+  .thumb { @apply relative block shrink-0 cursor-zoom-in overflow-hidden rounded-xl border border-line bg-paper-2; }
+  .thumb img { @apply h-full w-full object-cover transition duration-300; }
+  .thumb:hover img, .thumb:focus-visible img { transform: scale(1.04); }
+
+  /* Photo viewer */
+  .lightbox { @apply m-auto max-h-[100dvh] w-full max-w-none bg-transparent p-0 text-paper backdrop:bg-ink/90 backdrop:backdrop-blur-sm; }
+  .lb-btn { @apply grid h-11 w-11 place-items-center rounded-full bg-white/10 text-white transition hover:bg-white/20; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @view-transition { navigation: none; }
+}
+
+@layer components {
+  /* Compact tech-stack table under a role */
+  .stack { @apply mt-4 grid gap-x-6 gap-y-1.5 rounded-xl border border-line bg-paper-card px-4 py-3 text-[14px] sm:grid-cols-2; }
+  .stack-row { @apply grid grid-cols-[5.5rem_1fr] gap-2; }
+  .stack dt { @apply font-mono text-[10.5px] uppercase leading-[1.9] tracking-[0.06em] text-ink-50; }
+  .stack dd { @apply text-ink-80; }
+}
